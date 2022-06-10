@@ -41,10 +41,12 @@ export default function Layout({ children }: LayoutProps) {
           hidden={!opened}
           width={{ sm: 200, lg: 300 }}
         >
-          {Object.entries(modules).map(([name, { path }]) => (
-            <Link key={name} href={path} passHref>
-              <Anchor>{name}</Anchor>
-            </Link>
+          {Object.values(modules).map(({ name, path }) => (
+            <Navbar.Section key={name}>
+              <Link href={path} passHref>
+                <Anchor>{name}</Anchor>
+              </Link>
+            </Navbar.Section>
           ))}
         </Navbar>
       }
