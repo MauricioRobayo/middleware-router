@@ -1,11 +1,7 @@
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {
-  return (
-    <header>
-      <h1>This is it</h1>
-    </header>
-  );
+  return <div>This is the root if not overwritten</div>;
 };
 
 export default Home;
