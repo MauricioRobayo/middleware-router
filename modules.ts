@@ -6,7 +6,7 @@ const modules = {
     path: "/",
   },
   appointments: {
-    path: "appointment",
+    path: "/appointments",
   },
 };
 
