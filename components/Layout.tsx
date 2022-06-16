@@ -1,17 +1,16 @@
+import {
+  AppShell,
+  Burger,
+  Footer,
+  Header,
+  Text,
+  useMantineTheme,
+  Menu,
+  Group,
+  Anchor,
+} from "@mantine/core";
 import Link from "next/link";
 import { ReactNode, useState } from "react";
-import {
-  Anchor,
-  AppShell,
-  Navbar,
-  Header,
-  Footer,
-  Aside,
-  Text,
-  MediaQuery,
-  Burger,
-  useMantineTheme,
-} from "@mantine/core";
 import modules from "../modules";
 
 interface LayoutProps {
@@ -31,32 +30,6 @@ export default function Layout({ children }: LayoutProps) {
               : theme.colors.gray[0],
         },
       }}
-      navbarOffsetBreakpoint="sm"
-      asideOffsetBreakpoint="sm"
-      fixed
-      navbar={
-        <Navbar
-          p="md"
-          hiddenBreakpoint="sm"
-          hidden={!opened}
-          width={{ sm: 200, lg: 300 }}
-        >
-          {Object.values(modules).map(({ name, path }) => (
-            <Navbar.Section key={name}>
-              <Link href={path} passHref>
-                <Anchor>{name}</Anchor>
-              </Link>
-            </Navbar.Section>
-          ))}
-        </Navbar>
-      }
-      aside={
-        <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-            <Text>Sidebar</Text>
-          </Aside>
-        </MediaQuery>
-      }
       footer={
         <Footer height={60} p="md">
           Footer
@@ -64,21 +37,28 @@ export default function Layout({ children }: LayoutProps) {
       }
       header={
         <Header height={70} p="md">
-          <div
-            style={{ display: "flex", alignItems: "center", height: "100%" }}
-          >
-            <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-              <Burger
-                opened={opened}
-                onClick={() => setOpened((o) => !o)}
-                size="sm"
-                color={theme.colors.gray[6]}
-                mr="xl"
-              />
-            </MediaQuery>
-
+          <Group position="apart">
             <Text>Medlify</Text>
-          </div>
+            <Menu
+              control={
+                <Burger
+                  opened={opened}
+                  onClick={() => setOpened((o) => !o)}
+                  size="sm"
+                  color={theme.colors.gray[6]}
+                  mr="xl"
+                />
+              }
+            >
+              {Object.values(modules.config).map(({ path, name }) => (
+                <Menu.Item key={path}>
+                  <Link href={path}>
+                    <Anchor>{name}</Anchor>
+                  </Link>
+                </Menu.Item>
+              ))}
+            </Menu>
+          </Group>
         </Header>
       }
     >
