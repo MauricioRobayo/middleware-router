@@ -12,11 +12,8 @@ export async function middleware(req: NextRequest) {
     }
 
     if ("productsPath" in config && pathname.startsWith(config.productsPath)) {
-      const slug = req.nextUrl.pathname.replace("/products/", "");
-      const url = new URL(
-        `/medlify/store/products/${slug}`,
-        req.nextUrl.origin
-      );
+      const slug = req.nextUrl.pathname.replace(config.productsPath, "");
+      const url = new URL(`/medlify/store/products${slug}`, req.nextUrl.origin);
 
       return NextResponse.rewrite(url);
     }
