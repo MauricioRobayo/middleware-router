@@ -4,7 +4,7 @@ interface ProductPageProps {
   slug: string;
 }
 const ProductPage = ({ slug }: ProductPageProps) => {
-  return <div>Product {slug}</div>;
+  return <div>This is the page for {slug}</div>;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
