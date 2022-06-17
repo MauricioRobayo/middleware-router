@@ -1,16 +1,15 @@
 import {
+  Anchor,
   AppShell,
-  Burger,
+  Aside,
   Footer,
   Header,
+  Navbar,
   Text,
   useMantineTheme,
-  Menu,
-  Group,
-  Anchor,
 } from "@mantine/core";
 import Link from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import modules from "../modules";
 
 interface LayoutProps {
@@ -19,7 +18,6 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const theme = useMantineTheme();
-  const [opened, setOpened] = useState(false);
   return (
     <AppShell
       styles={{
@@ -30,36 +28,31 @@ export default function Layout({ children }: LayoutProps) {
               : theme.colors.gray[0],
         },
       }}
+      header={
+        <Header height={70} p="md">
+          <Text>Medlify</Text>
+        </Header>
+      }
+      navbar={
+        <Navbar width={{ base: 200 }} p="xs">
+          {Object.values(modules.config).map(({ path, name }) => (
+            <Navbar.Section key={path}>
+              <Link href={path} passHref>
+                <Anchor>{name}</Anchor>
+              </Link>
+            </Navbar.Section>
+          ))}
+        </Navbar>
+      }
+      aside={
+        <Aside width={{ base: 600 }} p="xs">
+          Hello
+        </Aside>
+      }
       footer={
         <Footer height={60} p="md">
           Footer
         </Footer>
-      }
-      header={
-        <Header height={70} p="md">
-          <Group position="apart">
-            <Text>Medlify</Text>
-            <Menu
-              control={
-                <Burger
-                  opened={opened}
-                  onClick={() => setOpened((o) => !o)}
-                  size="sm"
-                  color={theme.colors.gray[6]}
-                  mr="xl"
-                />
-              }
-            >
-              {Object.values(modules.config).map(({ path, name }) => (
-                <Menu.Item key={path}>
-                  <Link href={path}>
-                    <Anchor>{name}</Anchor>
-                  </Link>
-                </Menu.Item>
-              ))}
-            </Menu>
-          </Group>
-        </Header>
       }
     >
       {children}
