@@ -1,10 +1,9 @@
 import {
   Anchor,
   AppShell,
-  Aside,
   Footer,
+  Group,
   Header,
-  Navbar,
   Text,
   useMantineTheme,
 } from "@mantine/core";
@@ -29,28 +28,21 @@ export default function Layout({ children }: LayoutProps) {
         },
       }}
       header={
-        <Header height={70} p="md">
-          <Text>Medlify</Text>
+        <Header height="auto" p="md">
+          <Group position="apart">
+            <Text>Medlify</Text>
+            <Group>
+              {Object.values(modules.config).map(({ path, name }) => (
+                <Link key={path} href={path} passHref>
+                  <Anchor>{name}</Anchor>
+                </Link>
+              ))}
+            </Group>
+          </Group>
         </Header>
       }
-      navbar={
-        <Navbar width={{ base: 200 }} p="xs">
-          {Object.values(modules.config).map(({ path, name }) => (
-            <Navbar.Section key={path}>
-              <Link href={path} passHref>
-                <Anchor>{name}</Anchor>
-              </Link>
-            </Navbar.Section>
-          ))}
-        </Navbar>
-      }
-      aside={
-        <Aside width={{ base: 600 }} p="xs">
-          Hello
-        </Aside>
-      }
       footer={
-        <Footer height={60} p="md">
+        <Footer height="auto" p="md">
           Footer
         </Footer>
       }

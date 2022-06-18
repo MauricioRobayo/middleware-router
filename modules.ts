@@ -6,9 +6,9 @@ const modules = {
       name: "Login",
     },
     store: {
-      path: "/",
+      path: "/store",
       name: "Pharmacy",
-      productsPath: "/products",
+      productsPath: "/store/products",
     },
     appointments: {
       path: "/appointments",
